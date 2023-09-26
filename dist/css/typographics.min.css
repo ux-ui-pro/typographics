@@ -1,1 +1,0 @@
-:root{--landingGridWidth:var(--wrapper, min(1600px, 92vw));--landingGridGutter:var(--gutter, min(60px, 4vw));--landingGridColumn:calc((var(--landingGridWidth) - 11 * var(--landingGridGutter)) / 12);--landingGridMargin:calc((100vw - var(--landingGridWidth)) / 2)}
