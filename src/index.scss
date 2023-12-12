@@ -11,8 +11,6 @@
   --slope: calc((var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / (var(--max-vw) - var(--min-vw)));
 
   --font-size-clamp: clamp(var(--min-fs-rem), calc(var(--min-fs-rem) + var(--slope)), var(--max-fs-rem));
-  --font-family-default: "Noto Sans Display", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
 
   --default-line-height: 1.5;
   --heading-line-height: 1.3em;
@@ -20,18 +18,19 @@
 
 @mixin typography-heading($heading-font-size) {
   font-size: $heading-font-size;
+  font-weight: 400;
   line-height: var(--heading-line-height);
   margin-top: calc(var(--heading-line-height) / 2 * 2.5);
   margin-bottom: calc(var(--heading-line-height) / 2 * 1);
-  max-width: 1020px;
-  font-weight: 400;
+  max-inline-size: 50ch;
+  text-wrap: balance;
 }
 
 @mixin typography-paragraph($paragraph-font-size, $paragraph-line-height) {
   font-size: $paragraph-font-size;
   line-height: $paragraph-line-height;
   margin-bottom: calc(#{$paragraph-line-height} / 2);
-  max-width: 1020px;
+  text-wrap: balance;
 }
 
 html {
@@ -46,7 +45,7 @@ html {
 }
 
 body {
-  font-family: var(--font-family-default);
+  font-family: var(--font-family-default, "Noto Sans Display", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
   font-size: var(--font-size-clamp);
   line-height: var(--default-line-height);
   font-weight: 400;
