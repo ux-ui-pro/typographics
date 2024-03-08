@@ -1,8 +1,8 @@
 :root {
-  --min-fs: .75;
   --max-fs: 1;
-  --min-vw: 80;
+  --min-fs: .75;
   --max-vw: 120;
+  --min-vw: 80;
 
   --min-fs-rem: calc(var(--min-fs) * 1rem);
   --max-fs-rem: calc(var(--max-fs) * 1rem);
@@ -45,7 +45,7 @@ html {
 }
 
 body {
-  font-family: var(--font-family-default, "Noto Sans Display", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+  font-family: var(--font-family-default, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
   font-size: var(--font-size-clamp);
   line-height: var(--default-line-height);
   font-weight: 400;
