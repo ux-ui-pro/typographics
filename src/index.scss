@@ -3,22 +3,17 @@
   --min-fs: .75;
   --max-vw: 120;
   --min-vw: 80;
-
   --min-fs-rem: calc(var(--min-fs) * 1rem);
   --max-fs-rem: calc(var(--max-fs) * 1rem);
   --min-vw-rem: calc(var(--min-vw) * 1rem);
-
   --slope: calc((var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / (var(--max-vw) - var(--min-vw)));
-
   --font-size-clamp: clamp(var(--min-fs-rem), calc(var(--min-fs-rem) + var(--slope)), var(--max-fs-rem));
-
   --default-line-height: 1.5;
   --heading-line-height: 1.3em;
 }
 
 @mixin typography-heading($heading-font-size) {
   font-size: $heading-font-size;
-  font-weight: 400;
   line-height: var(--heading-line-height);
   margin-top: calc(var(--heading-line-height) / 2 * 2.5);
   margin-bottom: calc(var(--heading-line-height) / 2 * 1);
@@ -36,11 +31,10 @@
 html {
   font-size: 10px;
   font-feature-settings: "kern" 1, "liga" 0;
-  text-rendering: optimizeLegibility;
-  -webkit-text-size-adjust: none;
+  text-rendering: optimizelegibility;
+  text-size-adjust: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-kerning: auto;
   box-sizing: border-box;
 }
 
@@ -52,8 +46,8 @@ body {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -64,16 +58,19 @@ a {
 .display {
   &-large {
     @include typography-heading(5.7em);
+
     margin-left: -.08em;
   }
 
   &-medium {
     @include typography-heading(4.5em);
+
     margin-left: -.07em;
   }
 
   &-small {
     @include typography-heading(3.6em);
+
     margin-left: -.07em;
   }
 }
@@ -81,16 +78,19 @@ a {
 .headline {
   &-large {
     @include typography-heading(3.2em);
+
     margin-left: -.06em;
   }
 
   &-medium {
     @include typography-heading(2.8em);
+
     margin-left: -.06em;
   }
 
   &-small {
     @include typography-heading(2.4em);
+
     margin-left: -.05em;
   }
 }
@@ -98,17 +98,20 @@ a {
 .title {
   &-large {
     @include typography-heading(2.2em);
+
     margin-left: -.04em;
   }
 
   &-medium {
     @include typography-heading(1.6rem);
+
     font-weight: 600;
     margin-left: -.03em;
   }
 
   &-small {
     @include typography-heading(1.4rem);
+
     font-weight: 600;
   }
 }
@@ -116,16 +119,19 @@ a {
 .label {
   &-large {
     @include typography-paragraph(1.4rem, 2rem);
+
     font-weight: 600;
   }
 
   &-medium {
     @include typography-paragraph(1.2rem, 1.6rem);
+
     font-weight: 600;
   }
 
   &-small {
     @include typography-paragraph(1.1rem, 1.6rem);
+
     font-weight: 600;
   }
 }
