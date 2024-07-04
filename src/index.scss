@@ -1,22 +1,22 @@
 :root {
+  --max-vw: 1440;
+  --min-vw: 600;
   --max-fs: 1;
   --min-fs: .75;
-  --max-vw: 120;
-  --min-vw: 80;
   --min-fs-rem: calc(var(--min-fs) * 1rem);
   --max-fs-rem: calc(var(--max-fs) * 1rem);
-  --min-vw-rem: calc(var(--min-vw) * 1rem);
-  --slope: calc((var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / (var(--max-vw) - var(--min-vw)));
+  --min-vw-rem: calc((var(--min-vw) / 10) * 1rem);
+  --slope: calc((var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / ((var(--max-vw) / 10) - (var(--min-vw) / 10)));
   --font-size-clamp: clamp(var(--min-fs-rem), calc(var(--min-fs-rem) + var(--slope)), var(--max-fs-rem));
-  --default-line-height: 1.5;
-  --heading-line-height: 1.3em;
+  --line-height-base: 1.5;
+  --line-height-heading: 1.3em;
 }
 
 @mixin typography-heading($heading-font-size) {
   font-size: $heading-font-size;
-  line-height: var(--heading-line-height);
-  margin-top: calc(var(--heading-line-height) / 2 * 2.5);
-  margin-bottom: calc(var(--heading-line-height) / 2 * 1);
+  line-height: var(--line-height-heading);
+  margin-top: calc(var(--line-height-heading) / 2 * 2.5);
+  margin-bottom: calc(var(--line-height-heading) / 2 * 1);
   max-inline-size: 50ch;
   text-wrap: balance;
 }
@@ -39,9 +39,9 @@ html {
 }
 
 body {
-  font-family: var(--font-family-default, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+  font-family: var(--font-family-base, "Inter");
   font-size: var(--font-size-clamp);
-  line-height: var(--default-line-height);
+  line-height: var(--line-height-base);
   font-weight: 400;
 }
 

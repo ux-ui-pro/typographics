@@ -1,7 +1,7 @@
 {
   "name": "typographics",
-  "version": "0.0.5",
-  "description": "",
+  "version": "1.0.0",
+  "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
   "author": "ux-ui.pro",
   "license": "MIT",
   "repository": {
@@ -31,5 +31,27 @@
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-selector-bem-pattern": "^4.0.0"
   },
-  "keywords": []
+  "keywords": [
+    "typography",
+    "responsive",
+    "adaptive",
+    "font",
+    "size",
+    "scaling",
+    "variables",
+    "sass",
+    "scss",
+    "css",
+    "viewport",
+    "clamp",
+    "dynamic",
+    "balance",
+    "smoothing",
+    "rendering",
+    "optimization",
+    "design",
+    "modern",
+    "utilities",
+    "accessibility"
+  ]
 }
