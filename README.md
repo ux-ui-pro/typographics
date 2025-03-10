@@ -21,29 +21,26 @@ $ yarn add typographics
 <br>
 
 &#10148; **Import**
-
-<sub>CSS</sub>
-```css
-@import "typographics/dist";
+```javascript
+import 'typographics/dist/index.css';
 ```
-
-<sub>SCSS</sub>
-```css
-@import "typographics/src";
+<sub>or</sub>
+```SCSS
+@import "typographics/dist/index.css";
 ```
 <br>
 
 &#10148; **Settings**
 
-| Variable                |  Default  | Description                                                                    |
-|:------------------------|:---------:|:-------------------------------------------------------------------------------|
-| `--min-fs`              |   `.75`   | Sets the minimum font size from which scaling starts.                          |
-| `--max-fs`              |    `1`    | Sets the maximum font size at which scaling ends.                              |
-| `--min-vw`              |   `600`   | Sets the minimum viewport width in pixels from which font size scaling starts. |
-| `--max-vw`              |  `1440`   | Sets the maximum viewport width in pixels at which font size scaling ends.     |
-| `--font-family-base`    | `"Inter"` | Sets the default font family.                                                  |
-| `--line-height-base`    |   `1.5`   | Sets the default line height.                                                  |
-| `--line-height-heading` |  `1.3em`  | Sets the line height for headings.                                             |
+| Variable                   |  Default  | Description                                                                    |
+|:---------------------------|:---------:|:-------------------------------------------------------------------------------|
+| `--t-base-font-family`     | `"Inter"` | Sets the default font family.                                                  |
+| `--t-font-size-min-scale`  |  `0.75`   | Sets the minimum font size from which scaling starts.                          |
+| `--t-font-size-max-scale`  |    `1`    | Sets the maximum font size at which scaling ends.                              |
+| `--t-font-scale-min-width` |   `600`   | Sets the minimum viewport width in pixels from which font size scaling starts. |
+| `--t-font-scale-max-width` |  `1440`   | Sets the maximum viewport width in pixels at which font size scaling ends.     |
+| `--t-line-height-body`     |   `1.5`   | Sets the default line height.                                                  |
+| `--t-line-height-heading`  |  `1.3em`  | Sets the line height for headings.                                             |
 <br>
 
 &#10148; **License**

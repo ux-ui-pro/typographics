@@ -1,22 +1,16 @@
 :root {
-  --max-vw: 1440;
-  --min-vw: 600;
-  --max-fs: 1;
-  --min-fs: .75;
-  --min-fs-rem: calc(var(--min-fs) * 1rem);
-  --max-fs-rem: calc(var(--max-fs) * 1rem);
-  --min-vw-rem: calc((var(--min-vw) / 10) * 1rem);
-  --slope: calc((var(--max-fs) - var(--min-fs)) * (100vw - var(--min-vw-rem)) / ((var(--max-vw) / 10) - (var(--min-vw) / 10)));
-  --font-size-clamp: clamp(var(--min-fs-rem), calc(var(--min-fs-rem) + var(--slope)), var(--max-fs-rem));
-  --line-height-base: 1.5;
-  --line-height-heading: 1.3em;
+  --t-font-size-min-scale-rem: calc(var(--t-font-size-min-scale, 0.75) * 1rem);
+  --t-font-size-max-scale-rem: calc(var(--t-font-size-max-scale, 1) * 1rem);
+  --t-font-scale-min-width-rem: calc((var(--t-font-scale-min-width, 600) / 10) * 1rem);
+  --t-slope: calc((var(--t-font-size-max-scale, 1) - var(--t-font-size-min-scale, 0.75)) * (100vw - var(--t-font-scale-min-width-rem)) / ((var(--t-font-scale-max-width, 1440) / 10) - (var(--t-font-scale-min-width, 600) / 10)));
+  --t-font-size-clamp: clamp(var(--t-font-size-min-scale-rem), calc(var(--t-font-size-min-scale-rem) + var(--t-slope)), var(--t-font-size-max-scale-rem));
 }
 
 @mixin typography-heading($heading-font-size) {
   font-size: $heading-font-size;
-  line-height: var(--line-height-heading);
-  margin-top: calc(var(--line-height-heading) / 2 * 2.5);
-  margin-bottom: calc(var(--line-height-heading) / 2 * 1);
+  line-height: var(--t-line-height-heading, 1.3em);
+  margin-top: calc(var(--t-line-height-heading, 1.3em) / 2 * 2.5);
+  margin-bottom: calc(var(--t-line-height-heading, 1.3em) / 2 * 1);
   max-inline-size: 50ch;
   text-wrap: balance;
 }
@@ -39,9 +33,9 @@ html {
 }
 
 body {
-  font-family: var(--font-family-base, "Inter");
-  font-size: var(--font-size-clamp);
-  line-height: var(--line-height-base);
+  font-family: var(--t-base-font-family, "Inter"), serif;
+  font-size: var(--t-font-size-clamp);
+  line-height: var(--t-line-height-body, 1.5);
   font-weight: 400;
 }
 

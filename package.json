@@ -1,6 +1,6 @@
 {
   "name": "typographics",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -11,25 +11,25 @@
   "bugs": {
     "url": "https://github.com/ux-ui-pro/typographics/issues"
   },
-  "css": "dist/index.css",
-  "targets": {
-    "css": {
-      "source": "src/index.scss"
-    }
-  },
+  "homepage": "https://github.com/ux-ui-pro/typographics",
+  "sideEffects": false,
   "scripts": {
-    "clean": "rm -rf dist .parcel-cache",
-    "build": "yarn clean && parcel build",
-    "lint:scss": "stylelint **/*.scss",
-    "lintfix": "yarn lint:scss --fix"
+    "build": "vite build",
+    "lint:css": "stylelint src/**/*.scss",
+    "lint:fix:css": "stylelint src/**/*.scss --fix"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "exports": {
+    "./dist/*": "./dist/*"
+  },
+  "files": [
+    "dist/"
+  ],
   "devDependencies": {
-    "@parcel/transformer-sass": "2.12.0",
-    "parcel": "^2.12.0",
-    "stylelint": "^16.6.1",
-    "stylelint-config-standard-scss": "^13.1.0",
-    "stylelint-selector-bem-pattern": "^4.0.0"
+    "stylelint": "16.15.0",
+    "stylelint-config-standard-scss": "14.0.0",
+    "stylelint-selector-bem-pattern": "4.0.1",
+    "sass": "1.85.1",
+    "vite": "6.2.1"
   },
   "keywords": [
     "typography",
