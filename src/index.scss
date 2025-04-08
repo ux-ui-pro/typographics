@@ -33,7 +33,7 @@ html {
 }
 
 body {
-  font-family: var(--t-base-font-family, "Inter"), serif;
+  font-family: var(--t-base-font-family);
   font-size: var(--t-font-size-clamp);
   line-height: var(--t-line-height-body, 1.5);
   font-weight: 400;
