@@ -2,8 +2,16 @@
   --t-font-size-min-scale-rem: calc(var(--t-font-size-min-scale, 0.75) * 1rem);
   --t-font-size-max-scale-rem: calc(var(--t-font-size-max-scale, 1) * 1rem);
   --t-font-scale-min-width-rem: calc((var(--t-font-scale-min-width, 600) / 10) * 1rem);
-  --t-slope: calc((var(--t-font-size-max-scale, 1) - var(--t-font-size-min-scale, 0.75)) * (100vw - var(--t-font-scale-min-width-rem)) / ((var(--t-font-scale-max-width, 1440) / 10) - (var(--t-font-scale-min-width, 600) / 10)));
-  --t-font-size-clamp: clamp(var(--t-font-size-min-scale-rem), calc(var(--t-font-size-min-scale-rem) + var(--t-slope)), var(--t-font-size-max-scale-rem));
+  --t-slope: calc(
+    (var(--t-font-size-max-scale, 1) - var(--t-font-size-min-scale, 0.75)) * (100vw - var(--t-font-scale-min-width-rem)) / ((var(--t-font-scale-max-width, 1440) / 10) - (var(--t-font-scale-min-width, 600) / 10))
+  );
+  --t-font-size-clamp: clamp(
+    var(--t-font-size-min-scale-rem),
+    calc(var(--t-font-size-min-scale-rem) + var(--t-slope)),
+    var(--t-font-size-max-scale-rem)
+  );
+  --t-baseline: 0.8rem;
+  --t-half-baseline: calc(var(--t-baseline) / 2);
 }
 
 @mixin typography-heading($heading-font-size) {
@@ -18,12 +26,50 @@
 @mixin typography-paragraph($paragraph-font-size, $paragraph-line-height) {
   font-size: $paragraph-font-size;
   line-height: $paragraph-line-height;
-  margin-bottom: calc(#{$paragraph-line-height} / 2);
+  margin-bottom: var(--t-half-baseline);
   text-wrap: balance;
 
   &:last-of-type {
     margin-block-end: 0;
   }
+}
+
+@mixin typography-list($font-size, $line-height) {
+  font-size: $font-size;
+  line-height: $line-height;
+  margin-block: var(--t-half-baseline);
+  padding-left: var(--t-list-padding-left, 0);
+
+  li {
+    margin-block: calc(var(--t-half-baseline) / 2);
+  }
+}
+
+@mixin typography-code-inline() {
+  display: inline-block;
+  font-family: var(--t-monospace-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"), monospace;
+  font-size: var(--t-code-inline-font-size, 1em);
+  line-height: var(--t-code-inline-line-height, 1);
+  background: var(--t-code-inline-bg, rgb(0 0 0 / 5%));
+  color: var(--t-code-inline-color, #24292f);
+  border-radius: var(--t-code-inline-border-radius, 0.3em);
+  padding: var(--t-code-inline-padding, 0.25em 0.4em);
+  margin: var(--t-code-inline-margin, 0 0.25em);
+  box-shadow: 0 0 0 1px var(--t-code-inline-border-color, rgb(0 0 0 / 10%));
+}
+
+@mixin typography-code-block() {
+  font-family: var(--t-monospace-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"), monospace;
+  font-size: var(--t-code-block-font-size, 1.6rem);
+  line-height: var(--t-code-block-line-height, 1.6);
+  background: var(--t-code-block-bg, #F5F5F5);
+  color: var(--t-code-block-color, #24292f);
+  padding: var(--t-code-block-padding, 1.2rem 2rem);
+  margin: var(--t-code-block-margin, 1.3em 0);
+  border-radius: var(--t-code-block-border-radius, 0.6rem);
+  overflow-x: auto;
+  white-space: pre;
+  max-inline-size: 100%;
 }
 
 html {
@@ -37,7 +83,7 @@ html {
 }
 
 body {
-  font-family: var(--t-base-font-family);
+  font-family: var(--t-base-font-family, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial), sans-serif;
   font-size: var(--t-font-size-clamp);
   line-height: var(--t-line-height-body, 1.5);
   font-weight: 400;
@@ -116,7 +162,7 @@ a {
 
 .label {
   &-large {
-    @include typography-paragraph(1.4rem, 2rem);
+    @include typography-paragraph(1.4rem, 1.6rem);
 
     font-weight: 600;
   }
@@ -128,7 +174,7 @@ a {
   }
 
   &-small {
-    @include typography-paragraph(1.1rem, 1.6rem);
+    @include typography-paragraph(1.2rem, 1.6rem);
 
     font-weight: 600;
   }
@@ -152,6 +198,44 @@ ul,
 ol {
   padding-left: 0;
   list-style-position: outside;
-  font-size: 1.4rem;
-  line-height: 2rem;
+}
+
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+
+ul.list,
+ol.list {
+  &-large {
+    @include typography-list(1.6rem, 2.4rem);
+
+    margin-block: var(--t-baseline) var(--t-baseline);
+  }
+
+  &-medium {
+    @include typography-list(1.4rem, 2rem);
+
+    margin-block: var(--t-half-baseline) var(--t-baseline);
+  }
+
+  &-small {
+    @include typography-list(1.2rem, 1.6rem);
+
+    margin-block: var(--t-half-baseline) var(--t-half-baseline);
+  }
+}
+
+code:not(pre code) {
+  @include typography-code-inline;
+}
+
+pre {
+  @include typography-code-block;
+}
+
+input,
+button,
+select,
+textarea {
+  font: inherit;
+  line-height: inherit;
 }
