@@ -58,7 +58,7 @@
 
 @mixin typography-code-block() {
   font-family: var(--t-monospace-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"), monospace;
-  font-size: var(--t-code-block-font-size, 1.6rem);
+  font-size: var(--t-code-block-font-size, 1.4rem);
   line-height: var(--t-code-block-line-height, 1.6);
   background: var(--t-code-block-bg, #F5F5F5);
   color: var(--t-code-block-color, #24292f);

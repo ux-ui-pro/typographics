@@ -92,7 +92,7 @@ These properties customize fenced code blocks (`pre`):
 
 | Variable                       |    Default    | Description                        |
 |:-------------------------------|:-------------:|:-----------------------------------|
-| `--t-code-block-font-size`     |   `1.6rem`    | Font-size for code blocks.         |
+| `--t-code-block-font-size`     |   `1.4rem`    | Font-size for code blocks.         |
 | `--t-code-block-line-height`   |     `1.6`     | Line-height for code blocks.       |
 | `--t-code-block-bg`            |   `#F5F5F5`   | Background color.                  |
 | `--t-code-block-color`         |   `#24292f`   | Text color.                        |
