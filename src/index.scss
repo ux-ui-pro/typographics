@@ -16,33 +16,31 @@
 
 @mixin typography-heading($heading-font-size) {
   font-size: $heading-font-size;
-  line-height: var(--t-line-height-heading, 1.3em);
-  margin-top: calc(var(--t-line-height-heading, 1.3em) / 2 * 2.5);
-  margin-bottom: calc(var(--t-line-height-heading, 1.3em) / 2 * 1);
+  line-height: var(--t-line-height-heading, 1.3);
+  margin-top: 1.25lh;
+  margin-bottom: 0.5lh;
   max-inline-size: 50ch;
   text-wrap: balance;
 }
 
-@mixin typography-paragraph($paragraph-font-size, $paragraph-line-height) {
+@mixin typography-paragraph($paragraph-font-size, $paragraph-line-height, $paragraph-font-weight) {
   font-size: $paragraph-font-size;
   line-height: $paragraph-line-height;
-  margin-bottom: var(--t-half-baseline);
+  margin-bottom: 0.75lh;
   text-wrap: balance;
+  font-weight: $paragraph-font-weight;
 
-  &:last-of-type {
-    margin-block-end: 0;
-  }
+  &:last-of-type { margin-block-end: 0; }
 }
 
-@mixin typography-list($font-size, $line-height) {
+@mixin typography-list($font-size, $line-height, $margin-block) {
   font-size: $font-size;
   line-height: $line-height;
-  margin-block: var(--t-half-baseline);
   padding-left: var(--t-list-padding-left, 0);
+  padding-inline-start: 2.5rem;
+  margin-block: $margin-block;
 
-  li {
-    margin-block: calc(var(--t-half-baseline) / 2);
-  }
+  li { margin-block: 0.25lh; }
 }
 
 @mixin typography-code-inline() {
@@ -54,7 +52,7 @@
   color: var(--t-code-inline-color, #24292f);
   border-radius: var(--t-code-inline-border-radius, 0.3em);
   padding: var(--t-code-inline-padding, 0.25em 0.4em);
-  margin: var(--t-code-inline-margin, 0 0.25em);
+  margin: var(--t-code-inline-margin, 0 0.4em);
   box-shadow: 0 0 0 1px var(--t-code-inline-border-color, rgb(0 0 0 / 10%));
 }
 
@@ -91,108 +89,9 @@ body {
 
 *,
 *::before,
-*::after {
-  box-sizing: inherit;
-}
+*::after { box-sizing: inherit; }
 
-a {
-  text-decoration-skip-ink: auto;
-}
-
-.display {
-  &-large {
-    @include typography-heading(5.7em);
-
-    margin-left: -.08em;
-  }
-
-  &-medium {
-    @include typography-heading(4.5em);
-
-    margin-left: -.07em;
-  }
-
-  &-small {
-    @include typography-heading(3.6em);
-
-    margin-left: -.07em;
-  }
-}
-
-.headline {
-  &-large {
-    @include typography-heading(3.2em);
-
-    margin-left: -.06em;
-  }
-
-  &-medium {
-    @include typography-heading(2.8em);
-
-    margin-left: -.06em;
-  }
-
-  &-small {
-    @include typography-heading(2.4em);
-
-    margin-left: -.05em;
-  }
-}
-
-.title {
-  &-large {
-    @include typography-heading(2.2em);
-
-    margin-left: -.04em;
-  }
-
-  &-medium {
-    @include typography-heading(1.6rem);
-
-    font-weight: 600;
-    margin-left: -.03em;
-  }
-
-  &-small {
-    @include typography-heading(1.4rem);
-
-    font-weight: 600;
-  }
-}
-
-.label {
-  &-large {
-    @include typography-paragraph(1.4rem, 1.6rem);
-
-    font-weight: 600;
-  }
-
-  &-medium {
-    @include typography-paragraph(1.2rem, 1.6rem);
-
-    font-weight: 600;
-  }
-
-  &-small {
-    @include typography-paragraph(1.2rem, 1.6rem);
-
-    font-weight: 600;
-  }
-}
-
-.body {
-  &-large {
-    @include typography-paragraph(1.6rem, 2.4rem);
-  }
-
-  &-medium {
-    @include typography-paragraph(1.4rem, 2rem);
-  }
-
-  &-small {
-    @include typography-paragraph(1.2rem, 1.6rem);
-  }
-}
+a { text-decoration-skip-ink: auto; }
 
 ul,
 ol {
@@ -203,35 +102,6 @@ ol {
 ul { list-style-type: disc; }
 ol { list-style-type: decimal; }
 
-ul.list,
-ol.list {
-  &-large {
-    @include typography-list(1.6rem, 2.4rem);
-
-    margin-block: var(--t-baseline) var(--t-baseline);
-  }
-
-  &-medium {
-    @include typography-list(1.4rem, 2rem);
-
-    margin-block: var(--t-half-baseline) var(--t-baseline);
-  }
-
-  &-small {
-    @include typography-list(1.2rem, 1.6rem);
-
-    margin-block: var(--t-half-baseline) var(--t-half-baseline);
-  }
-}
-
-code:not(pre code) {
-  @include typography-code-inline;
-}
-
-pre {
-  @include typography-code-block;
-}
-
 input,
 button,
 select,
@@ -239,3 +109,44 @@ textarea {
   font: inherit;
   line-height: inherit;
 }
+
+.display {
+  &-large { @include typography-heading(5.7em); }
+  &-medium { @include typography-heading(4.5em); }
+  &-small { @include typography-heading(3.6em); }
+}
+
+.headline {
+  &-large { @include typography-heading(3.2em); }
+  &-medium { @include typography-heading(2.8em); }
+  &-small { @include typography-heading(2.4em); }
+}
+
+.title {
+  &-large { @include typography-heading(2.2em); }
+  &-medium { @include typography-heading(2em); }
+  &-small { @include typography-heading(1.8em); }
+}
+
+.label {
+  &-large { @include typography-paragraph(1.4rem, 1.3, 600); }
+  &-medium { @include typography-paragraph(1.2rem, 1.35, 600); }
+  &-small { @include typography-paragraph(1.1rem, 1.2, 600); }
+}
+
+.body {
+  &-large { @include typography-paragraph(1.6rem, 1.5, 400); }
+  &-medium { @include typography-paragraph(1.4rem, 1.45, 400); }
+  &-small { @include typography-paragraph(1.2rem, 1.35, 400); }
+}
+
+ul.list,
+ol.list {
+  &-large { @include typography-list(1.6rem, 1.5, 0.75lh 0.75lh); }
+  &-medium { @include typography-list(1.4rem, 1.45, 0.5lh 0.75lh); }
+  &-small { @include typography-list(1.2rem, 1.35, 0.5lh 0.5lh); }
+}
+
+code:not(pre code) { @include typography-code-inline; }
+
+pre { @include typography-code-block; }
