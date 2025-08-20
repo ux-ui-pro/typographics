@@ -60,7 +60,7 @@
   color: var(--t-code-inline-color, #24292f);
   border-radius: var(--t-code-inline-border-radius, 0.3em);
   padding: var(--t-code-inline-padding, 0.25em 0.4em);
-  margin: var(--t-code-inline-margin, 0 0.4em);
+  margin: var(--t-code-inline-margin, 0 0.25em);
   box-shadow: 0 0 0 1px var(--t-code-inline-border-color, rgb(0 0 0 / 10%));
 }
 
@@ -159,5 +159,8 @@ code:not(pre code) { @include typography-code-inline; }
 pre {
   @include typography-code-block;
 
-  code { padding: var(--t-code-block-padding, 1.2rem 2rem); }
+  code {
+    display: inline-block;
+    padding: var(--t-code-block-padding, 1.2rem 2rem);
+  }
 }
