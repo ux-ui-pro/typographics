@@ -36,7 +36,6 @@
   line-height: $paragraph-line-height;
   font-weight: $paragraph-font-weight;
   margin-bottom: 0.75lh;
-  text-wrap: balance;
 
   @include reset-last-margin;
 }
