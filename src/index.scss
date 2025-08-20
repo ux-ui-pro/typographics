@@ -70,7 +70,6 @@
   line-height: var(--t-code-block-line-height, 1.6);
   background: var(--t-code-block-bg, #f5f5f5);
   color: var(--t-code-block-color, #24292f);
-  padding: var(--t-code-block-padding, 1.2rem 2rem);
   margin: var(--t-code-block-margin, 1.3em 0);
   border-radius: var(--t-code-block-border-radius, 0.6rem);
   overflow-x: auto;
@@ -157,4 +156,8 @@ ol.list {
 
 code:not(pre code) { @include typography-code-inline; }
 
-pre { @include typography-code-block; }
+pre {
+  @include typography-code-block;
+
+  code { padding: var(--t-code-block-padding, 1.2rem 2rem); }
+}
