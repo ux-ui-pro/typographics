@@ -1,6 +1,6 @@
 {
   "name": "typographics",
-  "version": "2.4.7",
+  "version": "3.0.0",
   "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -12,7 +12,9 @@
     "url": "https://github.com/ux-ui-pro/typographics/issues"
   },
   "homepage": "https://github.com/ux-ui-pro/typographics",
-  "sideEffects": false,
+  "sideEffects": [
+    "dist/*.css"
+  ],
   "scripts": {
     "build": "vite build",
     "lint:css": "stylelint src/**/*.scss",
@@ -24,11 +26,16 @@
   "files": [
     "dist/"
   ],
+  "browserslist": [
+    ">=0.5%",
+    "last 2 versions",
+    "not dead"
+  ],
   "devDependencies": {
-    "stylelint": "16.23.1",
-    "stylelint-config-standard-scss": "15.0.1",
-    "sass": "1.90.0",
-    "vite": "7.1.3"
+    "stylelint": "16.25.0",
+    "stylelint-config-standard-scss": "16.0.0",
+    "sass": "1.93.3",
+    "vite": "7.1.12"
   },
   "keywords": [
     "typography",

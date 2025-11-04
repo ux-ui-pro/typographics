@@ -36,26 +36,23 @@ The following CSS Custom Properties control the behavior of the system.
 
 ### Core scale
 
-| Variable                        |  Default  | Description                                          |
-|:--------------------------------|:---------:|:-----------------------------------------------------|
-| `--t-base-font-family`          | `"Inter"` | Base font-family for body text.                      |
-| `--t-font-size-min-scale`       |  `0.75`   | Minimum root font-size scale (start of fluid range). |
-| `--t-font-size-max-scale`       |    `1`    | Maximum root font-size scale (end of fluid range).   |
-| `--t-font-scale-min-width`      |   `600`   | Viewport width (px) where scaling starts.            |
-| `--t-font-scale-max-width`      |  `1440`   | Viewport width (px) where scaling stops.             |
-| `--t-line-height-body`          |   `1.5`   | Default line-height for body text.                   |
-| `--t-line-height-heading`       |   `1.3`   | Line-height for headings (unitless).                 |
+| Variable                        |                                       Default                                       | Description                                          |
+|:--------------------------------|:-----------------------------------------------------------------------------------:|:-----------------------------------------------------|
+| `--t-base-font-family`          | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` | Base font-family for body text.                      |
+| `--t-font-size-min-scale`       |                                       `0.75`                                        | Minimum root font-size scale (start of fluid range). |
+| `--t-font-size-max-scale`       |                                         `1`                                         | Maximum root font-size scale (end of fluid range).   |
+| `--t-font-scale-min-width`      |                                        `600`                                        | Viewport width (px) where scaling starts.            |
+| `--t-font-scale-max-width`      |                                       `1440`                                        | Viewport width (px) where scaling stops.             |
+| `--t-line-height-body`          |                                        `1.5`                                        | Default line-height for body text.                   |
+| `--t-line-height-heading`       |                                        `1.3`                                        | Line-height for headings (unitless).                 |
 
 > The library computes `--t-font-size-clamp` from these values to fluidly scale the root font size.
+>
+> Viewport units: The root scaling uses `100vw` by default and switches to `100lvw` in supporting browsers for more stable mobile behavior.
 
-### Baseline & spacing
+### Spacing
 
-| Variable               |            Default            | Description                                    |
-|:-----------------------|:-----------------------------:|:-----------------------------------------------|
-| `--t-baseline`         |           `0.8rem`            | Base unit for vertical rhythm (baseline grid). |
-| `--t-half-baseline`    | `calc(var(--t-baseline) / 2)` | Half-step used for compact spacing.            |
-
-**Note on `lh`:** Components use `lh`-relative spacing (e.g., `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change.
+**Note on `lh`:** Components use `lh`-relative spacing (e.g., `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change, keeping a consistent vertical rhythm without additional spacing variables.
 
 ### Lists
 
@@ -66,25 +63,25 @@ Utilities `ul.list-*` / `ol.list-*` apply consistent padding and rhythm:
 
 A custom property is available if you need to control container padding directly:
 
-| Variable                | Default | Description                                               |
-|:------------------------|:-------:|:----------------------------------------------------------|
-| `--t-list-padding-left` |   `0`   | Base padding if you build your own list wrappers.         |
+| Variable                | Default  | Description                                        |
+|:------------------------|:--------:|:---------------------------------------------------|
+| `--t-list-padding-left` | `2.5rem` | Base padding if you build your own list wrappers.  |
 
 ### Inline code
 
 These properties customize inline code fragments (`code:not(pre code)`):
 
-| Variable                       |                                    Default                                    | Description                                |
-|:-------------------------------|:-----------------------------------------------------------------------------:|:-------------------------------------------|
-| `--t-monospace-font-family`    | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace` | Monospace stack for code.                  |
-| `--t-code-inline-font-size`    |                                     `1em`                                     | Font-size relative to surrounding text.    |
-| `--t-code-inline-line-height`  |                                      `1`                                      | Line-height for inline code.               |
-| `--t-code-inline-bg`           |                               `rgb(0 0 0 / 5%)`                               | Background color.                          |
-| `--t-code-inline-color`        |                                   `#24292f`                                   | Text color.                                |
-| `--t-code-inline-border-radius`|                                    `0.3em`                                    | Corner radius.                             |
-| `--t-code-inline-padding`      |                                `0.25em 0.4em`                                 | Internal padding.                          |
-| `--t-code-inline-margin`       |                                  `0 0.4em`                                    | External margin.                           |
-| `--t-code-inline-border-color` |                              `rgb(0 0 0 / 10%)`                               | Outline color used by the subtle 1px ring. |
+| Variable                         |                                    Default                                    | Description                                |
+|:---------------------------------|:-----------------------------------------------------------------------------:|:-------------------------------------------|
+| `--t-monospace-font-family`      | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace` | Monospace stack for code.                  |
+| `--t-code-inline-font-size`      |                                     `1em`                                     | Font-size relative to surrounding text.    |
+| `--t-code-inline-line-height`    |                                      `1`                                      | Line-height for inline code.               |
+| `--t-code-inline-bg`             |                               `rgb(0 0 0 / 5%)`                               | Background color.                          |
+| `--t-code-inline-color`          |                                   `#24292f`                                   | Text color.                                |
+| `--t-code-inline-border-radius`  |                                    `0.3em`                                    | Corner radius.                             |
+| `--t-code-inline-padding`        |                                `0.25em 0.4em`                                 | Internal padding.                          |
+| `--t-code-inline-margin`         |                                  `0 0.25em`                                   | External margin.                           |
+| `--t-code-inline-border-color`   |                              `rgb(0 0 0 / 10%)`                               | Outline color used by the subtle 1px ring. |
 
 ### Code block
 

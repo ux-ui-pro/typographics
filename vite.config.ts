@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
+    sourcemap: true,
     cssCodeSplit: false,
     emptyOutDir: true,
     rollupOptions: {
