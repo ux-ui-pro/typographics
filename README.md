@@ -26,7 +26,7 @@ import 'typographics/dist/index.css';
 ```
 <sub>or</sub>
 ```scss
-@import "typographics/dist/index.css";
+@use "typographics/dist/index.css" as *;
 ```
 <br>
 

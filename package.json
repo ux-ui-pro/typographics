@@ -1,6 +1,6 @@
 {
   "name": "typographics",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
   "author": "ux-ui.pro",
   "license": "MIT",
