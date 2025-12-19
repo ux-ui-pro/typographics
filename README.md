@@ -50,6 +50,33 @@ The following CSS Custom Properties control the behavior of the system.
 >
 > Viewport units: The root scaling uses `100vw` by default and switches to `100lvw` in supporting browsers for more stable mobile behavior.
 
+### Typography scaling (global/local)
+
+These variables allow you to tweak overall typography sizes (e.g. “everything 10% smaller”) **without copying internal `calc()` formulas**. They can be set globally on `:root` or locally on any container.
+
+| Variable              | Default | Description                                         |
+|:----------------------|:-------:|:----------------------------------------------------|
+| `--t-body-scale`      |   `1`   | Multiplier for body/paragraph/list/font-size rules. |
+| `--t-heading-scale`   |   `1`   | Multiplier for heading font-size rules.             |
+
+**Examples**
+
+Global scale:
+
+```css
+:root {
+  --t-body-scale: 0.9;
+  --t-heading-scale: 0.9;
+}
+```
+
+Local scale:
+
+```css
+.article { --t-body-scale: 0.95; }
+.hero { --t-heading-scale: 0.9; }
+```
+
 ### Spacing
 
 **Note on `lh`:** Components use `lh`-relative spacing (e.g., `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change, keeping a consistent vertical rhythm without additional spacing variables.
