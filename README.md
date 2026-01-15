@@ -5,22 +5,21 @@
 [![npm](https://img.shields.io/npm/v/typographics.svg?colorB=brightgreen)](https://www.npmjs.com/package/typographics)
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/typographics.svg)](https://github.com/ux-ui-pro/typographics)
 [![NPM Downloads](https://img.shields.io/npm/dm/typographics.svg?style=flat)](https://www.npmjs.org/package/typographics)
-
 </div>
 
 <p align="center">typographics provides flexible and adaptive typography primitives. It fluidly scales root font size between breakpoints and maintains a consistent vertical rhythm using a baseline grid.</p>
 <p align="center"><a href="https://codepen.io/ux-ui/pen/BavYXRz">Demo</a></p>
+
 <br>
 
-&#10148; **Install**
-
+# Install
 ```console
 $ yarn add typographics
 ```
+
 <br>
 
-&#10148; **Import**
-
+# Import
 ```javascript
 import 'typographics/dist/index.css';
 ```
@@ -28,27 +27,64 @@ import 'typographics/dist/index.css';
 ```scss
 @use "typographics/dist/index.css" as *;
 ```
+
 <br>
 
-## Settings
+# Quick start
+
+Start by defining your fluid range (breakpoints) and the body/heading size endpoints on `:root`:
+
+```css
+:root {
+  /* Fluid range (px) */
+  --t-font-scale-min-width: 600;
+  --t-font-scale-max-width: 1440;
+
+  /* Base fluid sizes (scales of 1rem) */
+  --t-body-font-size-min-scale: 0.875;
+  --t-body-font-size-max-scale: 1.125;
+  --t-heading-font-size-min-scale: 1;
+  --t-heading-font-size-max-scale: 1.25;
+}
+```
+
+If you need “make everything smaller/bigger” without changing endpoints, use `--t-body-scale` / `--t-heading-scale` globally or per-container.
+
+<br>
+
+# Settings
 
 The following CSS Custom Properties control the behavior of the system.
 
-### Core scale
+### Fluid range (breakpoints)
 
-| Variable                        |                                       Default                                       | Description                                          |
-|:--------------------------------|:-----------------------------------------------------------------------------------:|:-----------------------------------------------------|
-| `--t-base-font-family`          | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` | Base font-family for body text.                      |
-| `--t-font-size-min-scale`       |                                       `0.75`                                        | Minimum root font-size scale (start of fluid range). |
-| `--t-font-size-max-scale`       |                                         `1`                                         | Maximum root font-size scale (end of fluid range).   |
-| `--t-font-scale-min-width`      |                                        `600`                                        | Viewport width (px) where scaling starts.            |
-| `--t-font-scale-max-width`      |                                       `1440`                                        | Viewport width (px) where scaling stops.             |
-| `--t-line-height-body`          |                                        `1.5`                                        | Default line-height for body text.                   |
-| `--t-line-height-heading`       |                                        `1.3`                                        | Line-height for headings (unitless).                 |
+| Variable                    | Default | Description                                |
+|:----------------------------|:-------:|:-------------------------------------------|
+| `--t-font-scale-min-width`  |  `600`  | Viewport width (px) where scaling starts.  |
+| `--t-font-scale-max-width`  | `1440`  | Viewport width (px) where scaling stops.   |
 
-> The library computes `--t-font-size-clamp` from these values to fluidly scale the root font size.
+> The library computes `--t-body-font-size-clamp` and `--t-heading-font-size-clamp` from these values to fluidly scale typography between breakpoints.
 >
-> Viewport units: The root scaling uses `100vw` by default and switches to `100lvw` in supporting browsers for more stable mobile behavior.
+> Viewport units: scaling uses `100vw` by default and switches to `100lvw` in supporting browsers for more stable mobile behavior.
+
+### Typography defaults
+
+| Variable                  |                                       Default                                       | Description                          |
+|:--------------------------|:-----------------------------------------------------------------------------------:|:-------------------------------------|
+| `--t-base-font-family`    | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` | Base font-family for body text.      |
+| `--t-line-height-body`    |                                        `1.5`                                        | Default line-height for body text.   |
+| `--t-line-height-heading` |                                        `1.3`                                        | Line-height for headings (unitless). |
+
+### Base fluid sizes (body/headings)
+
+These variables define the endpoints of the fluid range for body text and headings. They are expressed as scales of `1rem`.
+
+| Variable                           | Default | Description                                      |
+|:-----------------------------------|:-------:|:-------------------------------------------------|
+| `--t-body-font-size-min-scale`     | `0.875` | Minimum body font-size scale (at min width).     |
+| `--t-body-font-size-max-scale`     | `1.125` | Maximum body font-size scale (at max width).     |
+| `--t-heading-font-size-min-scale`  |   `1`   | Minimum heading font-size scale (at min width).  |
+| `--t-heading-font-size-max-scale`  | `1.25`  | Maximum heading font-size scale (at max width).  |
 
 ### Typography scaling (global/local)
 
@@ -59,7 +95,9 @@ These variables allow you to tweak overall typography sizes (e.g. “everything 
 | `--t-body-scale`      |   `1`   | Multiplier for body/paragraph/list/font-size rules. |
 | `--t-heading-scale`   |   `1`   | Multiplier for heading font-size rules.             |
 
-**Examples**
+<br>
+
+# Examples
 
 Global scale:
 
@@ -76,6 +114,39 @@ Local scale:
 .article { --t-body-scale: 0.95; }
 .hero { --t-heading-scale: 0.9; }
 ```
+
+### Per-style heading endpoints (optional)
+
+By default, heading styles (`.display-*`, `.headline-*`, `.title-*`) are computed by multiplying the global fluid heading clamp by a style coefficient (e.g. `--t-headline-medium`).
+
+If you need a specific heading style to be exactly a certain size at the **start** and **end** of the fluid range, you can override its endpoints with two custom properties:
+
+- `--t-<key>-min`: font-size at `--t-font-scale-min-width`
+- `--t-<key>-max`: font-size at `--t-font-scale-max-width`
+
+Example for `.headline-medium`:
+
+```css
+.headline-medium {
+  --t-headline-medium-min: 28px;
+  --t-headline-medium-max: 34px;
+}
+```
+
+**Note on `--t-heading-scale`:** When you provide `--t-<key>-min/max`, you override the computed endpoints, so `--t-heading-scale` will not automatically affect that style. If you want the global scale to apply, multiply it yourself:
+
+```css
+.headline-medium {
+  --t-headline-medium-min: calc(28px * var(--t-heading-scale, 1));
+  --t-headline-medium-max: calc(34px * var(--t-heading-scale, 1));
+}
+```
+
+Available keys:
+
+- `display-large`, `display-medium`, `display-small`
+- `headline-large`, `headline-medium`, `headline-small`
+- `title-large`, `title-medium`, `title-small`
 
 ### Spacing
 
@@ -125,6 +196,6 @@ These properties customize fenced code blocks (`pre`):
 | `--t-code-block-border-radius` |   `0.6rem`    | Corner radius.                     |
 <br>
 
-## License
+# License
 
 typographics is released under the MIT license.
