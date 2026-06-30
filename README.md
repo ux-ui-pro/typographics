@@ -1,36 +1,45 @@
-<p align="center"><strong>typographics</strong></p>
+# typographics
 
-<div align="center">
+Flexible and adaptive typography primitives that fluidly scale root font size between breakpoints and maintain a consistent vertical rhythm using a baseline grid.
 
 [![npm](https://img.shields.io/npm/v/typographics.svg?colorB=brightgreen)](https://www.npmjs.com/package/typographics)
-[![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/typographics.svg)](https://github.com/ux-ui-pro/typographics)
-[![NPM Downloads](https://img.shields.io/npm/dm/typographics.svg?style=flat)](https://www.npmjs.org/package/typographics)
-</div>
+[![NPM Downloads](https://img.shields.io/npm/dm/typographics.svg?style=flat)](https://www.npmjs.com/package/typographics)
 
-<p align="center">typographics provides flexible and adaptive typography primitives. It fluidly scales root font size between breakpoints and maintains a consistent vertical rhythm using a baseline grid.</p>
-<p align="center"><a href="https://codepen.io/ux-ui/pen/BavYXRz">Demo</a></p>
+[Demo](https://codepen.io/ux-ui/pen/BavYXRz)
 
-<br>
+---
 
-# Install
-```console
-$ yarn add typographics
+## Features
+
+- Fluid typography between configurable viewport breakpoints
+- Baseline-grid vertical rhythm with `lh`-relative spacing
+- CSS custom properties for global and local scaling
+- Optional per-style heading endpoints
+- Utilities for lists, inline code, and code blocks
+
+---
+
+## Installation
+
+```bash
+npm install typographics
 ```
 
-<br>
+Import the packaged stylesheet in your app entry:
 
-# Import
-```javascript
-import 'typographics/dist/index.css';
+```js
+import 'typographics';
 ```
-<sub>or</sub>
+
+Or use the deep Sass path:
+
 ```scss
 @use "typographics/dist/index.css" as *;
 ```
 
-<br>
+---
 
-# Quick start
+## Quick Start
 
 Start by defining your fluid range (breakpoints) and the body/heading size endpoints on `:root`:
 
@@ -50,18 +59,18 @@ Start by defining your fluid range (breakpoints) and the body/heading size endpo
 
 If you need “make everything smaller/bigger” without changing endpoints, use `--t-body-scale` / `--t-heading-scale` globally or per-container.
 
-<br>
+---
 
-# Settings
+## Settings
 
-The following CSS Custom Properties control the behavior of the system.
+The following CSS custom properties control the behavior of the system.
 
 ### Fluid range (breakpoints)
 
-| Variable                    | Default | Description                                |
-|:----------------------------|:-------:|:-------------------------------------------|
-| `--t-font-scale-min-width`  |  `600`  | Viewport width (px) where scaling starts.  |
-| `--t-font-scale-max-width`  | `1440`  | Viewport width (px) where scaling stops.   |
+| Variable                   | Default | Description                               |
+| :------------------------- | :-----: | :---------------------------------------- |
+| `--t-font-scale-min-width` |  `600`  | Viewport width (px) where scaling starts. |
+| `--t-font-scale-max-width` | `1440`  | Viewport width (px) where scaling stops.  |
 
 > The library computes `--t-body-font-size-clamp` and `--t-heading-font-size-clamp` from these values to fluidly scale typography between breakpoints.
 >
@@ -69,35 +78,35 @@ The following CSS Custom Properties control the behavior of the system.
 
 ### Typography defaults
 
-| Variable                  |                                       Default                                       | Description                          |
-|:--------------------------|:-----------------------------------------------------------------------------------:|:-------------------------------------|
-| `--t-base-font-family`    | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` | Base font-family for body text.      |
-| `--t-line-height-body`    |                                        `1.5`                                        | Default line-height for body text.   |
+| Variable                  |                                       Default                                       | Description                         |
+| :------------------------ | :---------------------------------------------------------------------------------: | :---------------------------------- |
+| `--t-base-font-family`    | `system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif` | Base font-family for body text.     |
+| `--t-line-height-body`    |                                        `1.5`                                        | Default line-height for body text.  |
 | `--t-line-height-heading` |                                        `1.3`                                        | Line-height for headings (unitless). |
 
 ### Base fluid sizes (body/headings)
 
 These variables define the endpoints of the fluid range for body text and headings. They are expressed as scales of `1rem`.
 
-| Variable                           | Default | Description                                      |
-|:-----------------------------------|:-------:|:-------------------------------------------------|
-| `--t-body-font-size-min-scale`     | `0.875` | Minimum body font-size scale (at min width).     |
-| `--t-body-font-size-max-scale`     | `1.125` | Maximum body font-size scale (at max width).     |
-| `--t-heading-font-size-min-scale`  |   `1`   | Minimum heading font-size scale (at min width).  |
-| `--t-heading-font-size-max-scale`  | `1.25`  | Maximum heading font-size scale (at max width).  |
+| Variable                          | Default | Description                                     |
+| :-------------------------------- | :-----: | :---------------------------------------------- |
+| `--t-body-font-size-min-scale`    | `0.875` | Minimum body font-size scale (at min width).    |
+| `--t-body-font-size-max-scale`    | `1.125` | Maximum body font-size scale (at max width).    |
+| `--t-heading-font-size-min-scale` |   `1`   | Minimum heading font-size scale (at min width). |
+| `--t-heading-font-size-max-scale` | `1.25`  | Maximum heading font-size scale (at max width). |
 
 ### Typography scaling (global/local)
 
-These variables allow you to tweak overall typography sizes (e.g. “everything 10% smaller”) **without copying internal `calc()` formulas**. They can be set globally on `:root` or locally on any container.
+These variables allow you to tweak overall typography sizes (for example, “everything 10% smaller”) **without copying internal `calc()` formulas**. They can be set globally on `:root` or locally on any container.
 
-| Variable              | Default | Description                                         |
-|:----------------------|:-------:|:----------------------------------------------------|
-| `--t-body-scale`      |   `1`   | Multiplier for body/paragraph/list/font-size rules. |
-| `--t-heading-scale`   |   `1`   | Multiplier for heading font-size rules.             |
+| Variable            | Default | Description                                         |
+| :------------------ | :-----: | :-------------------------------------------------- |
+| `--t-body-scale`    |   `1`   | Multiplier for body/paragraph/list/font-size rules. |
+| `--t-heading-scale` |   `1`   | Multiplier for heading font-size rules.             |
 
-<br>
+---
 
-# Examples
+## Examples
 
 Global scale:
 
@@ -111,13 +120,18 @@ Global scale:
 Local scale:
 
 ```css
-.article { --t-body-scale: 0.95; }
-.hero { --t-heading-scale: 0.9; }
+.article {
+  --t-body-scale: 0.95;
+}
+
+.hero {
+  --t-heading-scale: 0.9;
+}
 ```
 
 ### Per-style heading endpoints (optional)
 
-By default, heading styles (`.display-*`, `.headline-*`, `.title-*`) are computed by multiplying the global fluid heading clamp by a style coefficient (e.g. `--t-headline-medium`).
+By default, heading styles (`.display-*`, `.headline-*`, `.title-*`) are computed by multiplying the global fluid heading clamp by a style coefficient (for example, `--t-headline-medium`).
 
 If you need a specific heading style to be exactly a certain size at the **start** and **end** of the fluid range, you can override its endpoints with two custom properties:
 
@@ -150,7 +164,7 @@ Available keys:
 
 ### Spacing
 
-**Note on `lh`:** Components use `lh`-relative spacing (e.g., `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change, keeping a consistent vertical rhythm without additional spacing variables.
+**Note on `lh`:** Components use `lh`-relative spacing (for example, `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change, keeping a consistent vertical rhythm without additional spacing variables.
 
 ### Lists
 
@@ -161,32 +175,32 @@ Utilities `ul.list-*` / `ol.list-*` apply consistent padding and rhythm:
 
 A custom property is available if you need to control container padding directly:
 
-| Variable                | Default  | Description                                        |
-|:------------------------|:--------:|:---------------------------------------------------|
-| `--t-list-padding-left` | `2.5rem` | Base padding if you build your own list wrappers.  |
+| Variable                | Default  | Description                                       |
+| :---------------------- | :------: | :------------------------------------------------ |
+| `--t-list-padding-left` | `2.5rem` | Base padding if you build your own list wrappers. |
 
 ### Inline code
 
 These properties customize inline code fragments (`code:not(pre code)`):
 
-| Variable                         |                                    Default                                    | Description                                |
-|:---------------------------------|:-----------------------------------------------------------------------------:|:-------------------------------------------|
-| `--t-monospace-font-family`      | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace` | Monospace stack for code.                  |
-| `--t-code-inline-font-size`      |                                     `1em`                                     | Font-size relative to surrounding text.    |
-| `--t-code-inline-line-height`    |                                      `1`                                      | Line-height for inline code.               |
-| `--t-code-inline-bg`             |                               `rgb(0 0 0 / 5%)`                               | Background color.                          |
-| `--t-code-inline-color`          |                                   `#24292f`                                   | Text color.                                |
-| `--t-code-inline-border-radius`  |                                    `0.3em`                                    | Corner radius.                             |
-| `--t-code-inline-padding`        |                                `0.25em 0.4em`                                 | Internal padding.                          |
-| `--t-code-inline-margin`         |                                  `0 0.25em`                                   | External margin.                           |
-| `--t-code-inline-border-color`   |                              `rgb(0 0 0 / 10%)`                               | Outline color used by the subtle 1px ring. |
+| Variable                        |                                    Default                                    | Description                                |
+| :------------------------------ | :---------------------------------------------------------------------------: | :----------------------------------------- |
+| `--t-monospace-font-family`     | `ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace` | Monospace stack for code.                  |
+| `--t-code-inline-font-size`     |                                     `1em`                                     | Font-size relative to surrounding text.    |
+| `--t-code-inline-line-height`   |                                      `1`                                      | Line-height for inline code.               |
+| `--t-code-inline-bg`            |                               `rgb(0 0 0 / 5%)`                               | Background color.                          |
+| `--t-code-inline-color`         |                                   `#24292f`                                   | Text color.                                |
+| `--t-code-inline-border-radius` |                                    `0.3em`                                    | Corner radius.                             |
+| `--t-code-inline-padding`       |                                `0.25em 0.4em`                                 | Internal padding.                          |
+| `--t-code-inline-margin`        |                                  `0 0.25em`                                   | External margin.                           |
+| `--t-code-inline-border-color`  |                              `rgb(0 0 0 / 10%)`                               | Outline color used by the subtle 1px ring. |
 
 ### Code block
 
 These properties customize fenced code blocks (`pre`):
 
 | Variable                       |    Default    | Description                        |
-|:-------------------------------|:-------------:|:-----------------------------------|
+| :----------------------------- | :-----------: | :--------------------------------- |
 | `--t-code-block-font-size`     |   `1.4rem`    | Font-size for code blocks.         |
 | `--t-code-block-line-height`   |     `1.6`     | Line-height for code blocks.       |
 | `--t-code-block-bg`            |   `#F5F5F5`   | Background color.                  |
@@ -194,8 +208,9 @@ These properties customize fenced code blocks (`pre`):
 | `--t-code-block-padding`       | `1.2rem 2rem` | Internal padding.                  |
 | `--t-code-block-margin`        |   `1.3em 0`   | External margin (vertical rhythm). |
 | `--t-code-block-border-radius` |   `0.6rem`    | Corner radius.                     |
-<br>
 
-# License
+---
 
-typographics is released under the MIT license.
+## License
+
+MIT
