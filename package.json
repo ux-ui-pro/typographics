@@ -2,6 +2,7 @@
   "name": "typographics",
   "version": "3.2.0",
   "description": "typographics provides flexible and adaptive styles for typography on web pages. This package allows you to automate the resizing of fonts based on screen width, ensuring good readability on any device.",
+  "type": "module",
   "author": "ux-ui.pro",
   "license": "MIT",
   "repository": {
@@ -15,17 +16,36 @@
   "sideEffects": [
     "dist/*.css"
   ],
-  "scripts": {
-    "build": "vite build",
-    "lint:css": "stylelint src/**/*.scss",
-    "lint:fix:css": "stylelint src/**/*.scss --fix"
+  "packageManager": "npm@10.9.3",
+  "engines": {
+    "node": ">=20.19.0"
   },
+  "style": "./dist/index.css",
   "exports": {
+    ".": {
+      "style": "./dist/index.css",
+      "default": "./dist/index.css"
+    },
     "./dist/*": "./dist/*"
   },
   "files": [
-    "dist/"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "vite build",
+    "lint:css": "stylelint \"src/**/*.scss\"",
+    "lint:fix:css": "stylelint \"src/**/*.scss\" --fix",
+    "test:smoke": "node --test \"tests/**/*.js\"",
+    "pack:check": "npm pack --dry-run && publint",
+    "verify": "npm run lint:css && npm run build && npm run test:smoke && npm run pack:check",
+    "prepublishOnly": "npm run clean && npm run verify"
+  },
   "browserslist": [
     ">=0.5%",
     "last 2 versions",
@@ -33,6 +53,8 @@
   ],
   "devDependencies": {
     "lightningcss": "1.30.2",
+    "publint": "^0.3.21",
+    "rimraf": "6.1.3",
     "sass": "1.97.0",
     "stylelint": "16.25.0",
     "stylelint-config-standard-scss": "16.0.0",
