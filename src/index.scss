@@ -6,6 +6,7 @@
   :root {
     --t-body-scale: 1;
     --t-heading-scale: 1;
+    --t-code-block-scale: 1;
     --t-font-scale-min-width: 600;
     --t-font-scale-max-width: 1440;
     --t-scale-min-w: calc(var(--t-font-scale-min-width) * 1px);
@@ -145,7 +146,7 @@
 
 @mixin typography-code-block() {
   font-family: var(--t-monospace-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"), monospace;
-  font-size: calc(var(--t-code-block-font-size, 1.4rem) * var(--t-body-scale, 1));
+  font-size: var(--t-code-block-font-size, calc(var(--t-body-font-size-clamp) * var(--t-body-scale, 1) * var(--t-code-block-scale, 1)));
   line-height: var(--t-code-block-line-height, 1.6);
   background: var(--t-code-block-bg, #f5f5f5);
   color: var(--t-code-block-color, #24292f);
