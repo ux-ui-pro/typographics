@@ -57,7 +57,7 @@ Start by defining your fluid range (breakpoints) and the body/heading size endpo
 }
 ```
 
-If you need “make everything smaller/bigger” without changing endpoints, use `--t-body-scale` / `--t-heading-scale` globally or per-container.
+If you need “make everything smaller/bigger” without changing endpoints, use `--t-body-scale` / `--t-heading-scale` globally or per-container. Code blocks follow the body scale by default.
 
 ---
 
@@ -99,10 +99,11 @@ These variables define the endpoints of the fluid range for body text and headin
 
 These variables allow you to tweak overall typography sizes (for example, “everything 10% smaller”) **without copying internal `calc()` formulas**. They can be set globally on `:root` or locally on any container.
 
-| Variable            | Default | Description                                         |
-| :------------------ | :-----: | :-------------------------------------------------- |
-| `--t-body-scale`    |   `1`   | Multiplier for body/paragraph/list/font-size rules. |
-| `--t-heading-scale` |   `1`   | Multiplier for heading font-size rules.             |
+| Variable               | Default | Description                                               |
+| :--------------------- | :-----: | :-------------------------------------------------------- |
+| `--t-body-scale`       |   `1`   | Multiplier for body, paragraph, list, and code-block text. |
+| `--t-heading-scale`    |   `1`   | Multiplier for heading font-size rules.                    |
+| `--t-code-block-scale` |   `1`   | Code-block size relative to the fluid body size.           |
 
 ---
 
@@ -197,17 +198,20 @@ These properties customize inline code fragments (`code:not(pre code)`):
 
 ### Code block
 
+Code blocks follow the fluid body size by default. Setting `--t-code-block-font-size` replaces that calculation with an explicit size and bypasses `--t-body-scale`.
+
 These properties customize fenced code blocks (`pre`):
 
-| Variable                       |    Default    | Description                        |
-| :----------------------------- | :-----------: | :--------------------------------- |
-| `--t-code-block-font-size`     |   `1.4rem`    | Font-size for code blocks.         |
-| `--t-code-block-line-height`   |     `1.6`     | Line-height for code blocks.       |
-| `--t-code-block-bg`            |   `#F5F5F5`   | Background color.                  |
-| `--t-code-block-color`         |   `#24292f`   | Text color.                        |
-| `--t-code-block-padding`       | `1.2rem 2rem` | Internal padding.                  |
-| `--t-code-block-margin`        |   `1.3em 0`   | External margin (vertical rhythm). |
-| `--t-code-block-border-radius` |   `0.6rem`    | Corner radius.                     |
+| Variable                       |       Default       | Description                               |
+| :----------------------------- | :-----------------: | :---------------------------------------- |
+| `--t-code-block-scale`         |         `1`         | Multiplier for the fluid body size.       |
+| `--t-code-block-font-size`     | Fluid body font-size | Explicit font-size override.              |
+| `--t-code-block-line-height`   |        `1.6`        | Line-height for code blocks.              |
+| `--t-code-block-bg`            |      `#F5F5F5`      | Background color.                         |
+| `--t-code-block-color`         |      `#24292f`      | Text color.                               |
+| `--t-code-block-padding`       |    `1.2rem 2rem`    | Internal padding.                         |
+| `--t-code-block-margin`        |      `1.3em 0`      | External margin (vertical rhythm).        |
+| `--t-code-block-border-radius` |      `0.6rem`       | Corner radius.                            |
 
 ---
 
