@@ -20,5 +20,6 @@ jobs:
           cache: npm
       - run: npm install -g npm@latest
       - run: npm ci
+      - run: npx playwright install --with-deps chromium
       - run: npm run verify
       - run: npm publish --provenance --access public
