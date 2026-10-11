@@ -243,12 +243,6 @@ These properties customize fenced code blocks (`pre`):
 
 ---
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and verification.
-
----
-
 ## License
 
 MIT
