@@ -1,5 +1,13 @@
 @use "sass:math";
 @use "sass:meta";
+
+$heading-selectors:
+  "h1", "h2", "h3", "h4", "h5", "h6",
+  ".display-large", ".display-medium", ".display-small",
+  ".headline-large", ".headline-medium", ".headline-small",
+  ".title-large", ".title-medium", ".title-small";
+$paragraph-selectors: "p", ".body-large", ".body-medium", ".body-small";
+
 @layer reset, tokens, typography, components, utilities;
 
 @layer tokens {
@@ -7,6 +15,8 @@
     --t-body-scale: 1;
     --t-heading-scale: 1;
     --t-code-block-scale: 1;
+    --t-heading-space-before: 1.25lh;
+    --t-heading-space-after: 0.5lh;
     --t-font-scale-min-width: 600;
     --t-font-scale-max-width: 1440;
     --t-scale-min-w: calc(var(--t-font-scale-min-width) * 1px);
@@ -60,7 +70,7 @@
 }
 
 @mixin reset-last-margin() {
-  &:last-of-type:not(:only-of-type) { margin-block-end: 0; }
+  &:last-child { margin-block-end: 0; }
 }
 
 @mixin typography-heading($heading-font-size, $fluid-key: null) {
@@ -92,8 +102,7 @@
   }
 
   line-height: var(--t-line-height-heading, 1.3);
-  margin-top: 1.25lh;
-  margin-bottom: 0.5lh;
+  margin-block: var(--t-heading-space-before, 1.25lh) var(--t-heading-space-after, 0.5lh);
   max-inline-size: var(--t-heading-measure, 50ch);
   text-wrap: balance;
 
@@ -110,7 +119,7 @@
   font-size: calc(var(--t-body-font-size-clamp) * var(--t-body-scale, 1) * #{$k});
   line-height: $paragraph-line-height;
   font-weight: $paragraph-font-weight;
-  margin-bottom: 0.75lh;
+  margin-block-end: 0.75lh;
 
   @include reset-last-margin;
 }
@@ -281,5 +290,10 @@
   .label-medium,
   .label-small {
     font-variant-numeric: tabular-nums slashed-zero;
+  }
+
+  // The preceding heading owns the space to the next heading or paragraph.
+  :where(#{$heading-selectors}) + :is(#{$heading-selectors}, #{$paragraph-selectors}) {
+    margin-block-start: 0;
   }
 }

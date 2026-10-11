@@ -41,9 +41,10 @@
     "build": "vite build",
     "lint:css": "stylelint \"src/**/*.scss\"",
     "lint:fix:css": "stylelint \"src/**/*.scss\" --fix",
-    "test:smoke": "node --test \"tests/**/*.js\"",
+    "test:smoke": "node --test tests/smoke.test.js",
+    "test:layout": "node --test tests/heading-spacing.layout.test.js",
     "pack:check": "npm pack --dry-run && publint",
-    "verify": "npm run lint:css && npm run build && npm run test:smoke && npm run pack:check",
+    "verify": "npm run lint:css && npm run build && npm run test:smoke && npm run test:layout && npm run pack:check",
     "prepublishOnly": "npm run clean && npm run verify"
   },
   "browserslist": [
@@ -53,6 +54,7 @@
   ],
   "devDependencies": {
     "lightningcss": "1.30.2",
+    "playwright": "1.64.0",
     "publint": "^0.3.21",
     "rimraf": "6.1.3",
     "sass": "1.97.0",

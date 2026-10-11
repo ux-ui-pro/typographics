@@ -61,7 +61,7 @@ If you need “make everything smaller/bigger” without changing endpoints, use
 
 ---
 
-## Settings
+## Styling
 
 The following CSS custom properties control the behavior of the system.
 
@@ -105,9 +105,7 @@ These variables allow you to tweak overall typography sizes (for example, “eve
 | `--t-heading-scale`    |   `1`   | Multiplier for heading font-size rules.                    |
 | `--t-code-block-scale` |   `1`   | Code-block size relative to the fluid body size.           |
 
----
-
-## Examples
+### Scaling examples
 
 Global scale:
 
@@ -165,7 +163,37 @@ Available keys:
 
 ### Spacing
 
-**Note on `lh`:** Components use `lh`-relative spacing (for example, `0.5lh`, `0.75lh`). This ties margins to the element’s computed line-height, preserving rhythm when font sizes or line-heights change, keeping a consistent vertical rhythm without additional spacing variables.
+The `lh` unit resolves against the styled element's computed line-height. Heading spacing has two optional custom properties:
+
+| Variable                   | Default  | Description                                                     |
+| :------------------------- | :------: | :-------------------------------------------------------------- |
+| `--t-heading-space-before` | `1.25lh` | Start margin when a heading does not directly follow a heading. |
+| `--t-heading-space-after`  | `0.5lh`  | End margin, trimmed when the heading is its parent's last child. |
+
+These defaults are fallbacks. Set either property on `:root`, a container, or an individual heading; container values are inherited:
+
+```css
+.article {
+  --t-heading-space-before: 1lh;
+  --t-heading-space-after: 0.35lh;
+}
+```
+
+When a heading directly follows another heading, or a paragraph directly follows a heading, the following element's start margin is zero. The preceding heading's end margin controls the space between them:
+
+```html
+<article class="article">
+  <h2>Section</h2>
+  <h3>Subsection</h3>
+  <p>Article text.</p>
+</article>
+```
+
+These rules cover `h1`–`h6`, the existing `large`, `medium`, and `small` variants of `.display-*`, `.headline-*`, and `.title-*`, and paragraphs represented by `p`, `.body-large`, `.body-medium`, or `.body-small`. They apply only to direct siblings in the same parent; they do not cross wrappers. Other paragraph margins keep their existing behavior.
+
+For headings, paragraphs, and `.label-*` / `.body-*` utilities, the end margin is zero when the element is its parent's actual last child, including an only child. Being the last heading or paragraph of a particular tag no longer removes that margin while another element follows.
+
+Use ordinary CSS outside layers, or in the later `components` / `utilities` layers, to override margins or last-child trimming. To adjust a pair while keeping one margin responsible for its spacing, change the preceding heading's end margin and leave the following start margin at zero. In column flex or single-column grid layouts, the container's `gap` adds to that margin.
 
 ### Lists
 
@@ -212,6 +240,12 @@ These properties customize fenced code blocks (`pre`):
 | `--t-code-block-padding`       |    `1.2rem 2rem`    | Internal padding.                         |
 | `--t-code-block-margin`        |      `1.3em 0`      | External margin (vertical rhythm).        |
 | `--t-code-block-border-radius` |      `0.6rem`       | Corner radius.                            |
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and verification.
 
 ---
 
