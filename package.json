@@ -42,7 +42,7 @@
     "lint:css": "stylelint \"src/**/*.scss\"",
     "lint:fix:css": "stylelint \"src/**/*.scss\" --fix",
     "test:smoke": "node --test tests/smoke.test.js",
-    "test:layout": "node --test tests/heading-spacing.layout.test.js",
+    "test:layout": "node --test tests/heading-spacing.layout.test.js tests/table-text.layout.test.js",
     "pack:check": "npm pack --dry-run && publint",
     "verify": "npm run lint:css && npm run build && npm run test:smoke && npm run test:layout && npm run pack:check",
     "prepublishOnly": "npm run clean && npm run verify"
