@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "sass:math";
 @use "sass:meta";
 
@@ -7,6 +8,12 @@ $heading-selectors:
   ".headline-large", ".headline-medium", ".headline-small",
   ".title-large", ".title-medium", ".title-small";
 $paragraph-selectors: "p", ".body-large", ".body-medium", ".body-small";
+$body-text-styles: (
+  large: (font-size: 1em, line-height: 1.5),
+  medium: (font-size: 0.9em, line-height: 1.45),
+  small: (font-size: 0.85em, line-height: 1.35)
+);
+$table-text-classes: ".table-text", ".table-text-large", ".table-text-medium", ".table-text-small";
 
 @layer reset, tokens, typography, components, utilities;
 
@@ -139,6 +146,13 @@ $paragraph-selectors: "p", ".body-large", ".body-medium", ".body-small";
   li { margin-block: 0.25lh; }
 }
 
+@mixin typography-table-text($font-size: 1em, $line-height: var(--t-line-height-body, 1.5)) {
+  $k: math.div($font-size, 1em);
+
+  font-size: var(--t-table-font-size, calc(var(--t-body-font-size-clamp) * var(--t-body-scale, 1) * #{$k}));
+  line-height: var(--t-table-line-height, #{$line-height});
+}
+
 @mixin typography-code-inline() {
   display: inline-block;
   font-family: var(--t-monospace-font-family, ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono"), monospace;
@@ -236,9 +250,11 @@ $paragraph-selectors: "p", ".body-large", ".body-medium", ".body-small";
   }
 
   .body {
-    &-large { @include typography-paragraph(1em, 1.5, 400); }
-    &-medium { @include typography-paragraph(0.9em, 1.45, 400); }
-    &-small { @include typography-paragraph(0.85em, 1.35, 400); }
+    @each $size, $style in $body-text-styles {
+      &-#{$size} {
+        @include typography-paragraph(map.get($style, font-size), map.get($style, line-height), 400);
+      }
+    }
   }
 
   ul.list,
@@ -284,6 +300,27 @@ $paragraph-selectors: "p", ".body-large", ".body-medium", ".body-small";
   :where(p, .body-medium) {
     @include typography-paragraph(1em, 1.45, 400);
 
+  }
+
+  :where(table.table-text) {
+    @include typography-table-text;
+  }
+
+  @each $size, $style in $body-text-styles {
+    :where(table.table-text-#{$size}) {
+      @include typography-table-text(map.get($style, font-size), map.get($style, line-height));
+    }
+  }
+
+  // Keep ordinary paragraphs in owned cells and captions on the table's text metrics.
+  :where(
+    table:is(#{$table-text-classes}) > caption > p,
+    table:is(#{$table-text-classes}) > :is(thead, tbody, tfoot) > tr > :is(th, td) > p,
+    table:is(#{$table-text-classes}) > tr > :is(th, td) > p
+  ) {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
   }
 
   .label-large,

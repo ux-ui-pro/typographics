@@ -15,7 +15,7 @@ Flexible and adaptive typography primitives that fluidly scale root font size be
 - Baseline-grid vertical rhythm with `lh`-relative spacing
 - CSS custom properties for global and local scaling
 - Optional per-style heading endpoints
-- Utilities for lists, inline code, and code blocks
+- Utilities for lists, inline code, code blocks, and opt-in table text
 
 ---
 
@@ -101,7 +101,7 @@ These variables allow you to tweak overall typography sizes (for example, “eve
 
 | Variable               | Default | Description                                               |
 | :--------------------- | :-----: | :-------------------------------------------------------- |
-| `--t-body-scale`       |   `1`   | Multiplier for body, paragraph, list, and code-block text. |
+| `--t-body-scale`       |   `1`   | Multiplier for body, paragraph, list, code-block, and opted-in table text. |
 | `--t-heading-scale`    |   `1`   | Multiplier for heading font-size rules.                    |
 | `--t-code-block-scale` |   `1`   | Code-block size relative to the fluid body size.           |
 
@@ -207,6 +207,64 @@ A custom property is available if you need to control container padding directly
 | Variable                | Default  | Description                                       |
 | :---------------------- | :------: | :------------------------------------------------ |
 | `--t-list-padding-left` | `2.5rem` | Base padding if you build your own list wrappers. |
+
+### Table text
+
+Add `table-text` to a native table to opt in to fluid text sizing. The font size uses the body formula and the `--t-body-scale` resolved on the table, including values inherited from a container.
+
+```html
+<table class="table-text">
+  <caption>Package formats</caption>
+  <thead>
+    <tr><th scope="col">Package</th><th scope="col">Format</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>typographics</td><td>CSS only</td></tr>
+  </tbody>
+</table>
+```
+
+For a ready-made size, choose one of these standalone classes. Each uses the same font size and line-height as its corresponding `.body-*` style, including fluid sizing and local body scaling:
+
+| Class                 | Text metrics match | Line-height |
+| :-------------------- | :----------------- | :---------: |
+| `table-text-large`    | `.body-large`      | `1.5`       |
+| `table-text-medium`   | `.body-medium`     | `1.45`      |
+| `table-text-small`    | `.body-small`      | `1.35`      |
+
+```html
+<table class="table-text-large">
+  <tr><td>Text matching body-large.</td></tr>
+</table>
+
+<table class="table-text-small">
+  <tr><td>Text matching body-small.</td></tr>
+</table>
+```
+
+Each preset works on its own; adding `table-text` is optional. The base `table-text` keeps the fluid body size and uses `--t-line-height-body` or `1.5` for its line-height. Presets use the line-heights listed above.
+
+| Variable                | Default                                 | Description                                      |
+| :---------------------- | :-------------------------------------- | :----------------------------------------------- |
+| `--t-table-font-size`    | Fluid body size or selected preset size | Explicit font-size override; bypasses body scaling. |
+| `--t-table-line-height`  | Base or selected preset line-height     | Line-height for table text.                       |
+
+These properties take precedence over the base and preset defaults. Set them on `:root`, a container, or the table itself. For example, use a table inside `.article` for local scaling, or add `compact-report` to the table's classes for an explicit size:
+
+```css
+.article {
+  --t-body-scale: 0.95;
+}
+
+.compact-report {
+  --t-table-font-size: 0.875rem;
+  --t-table-line-height: 1.4;
+}
+```
+
+Font family and color follow normal inheritance. Native `th` emphasis and alignment are preserved. Paragraphs that are direct children of the table's caption or cells inherit their parent's font size, line-height, and weight. Explicit `.body-*` and `.label-*` styles keep their own text settings; paragraphs inside other wrappers or nested unmarked tables keep their existing paragraph styles.
+
+The table text classes add only text properties. The application controls margins, cell padding, borders, backgrounds, widths, column layout, alignment, wrapping, and scrolling. Existing global typography rules still apply, including paragraph margins. Changing text metrics can change wrapping and row heights. Use ordinary CSS outside layers, or the later `components` / `utilities` layers, for direct overrides.
 
 ### Inline code
 
